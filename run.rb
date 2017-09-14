@@ -2,16 +2,13 @@
 
 # Ranking table calculator
 
-require './file_reader'
+require './file_processor'
 require './lib/parser'
+require './lib/formatter'
 require './lib/league_result'
-input_data = [
-  'Lions 3, Snakes 3',
-  'Tarantulas 1, FC Awesome 0',
-  'Lions 1, FC Awesome 1',
-  'Tarantulas 3, Snakes 1',
-  'Lions 4, Grouches 0'
-]
+file = './sample-input.txt'
+input_data = FileProcessor.read_lines(file)
 parsed_data = Parser.process(input_data)
-result = LeagueResult.new(parsed_data).calculate
-puts result
+result = Formatter.process LeagueResult.new(parsed_data).calculate
+puts FileProcessor.write_lines('res.txt', result)
+
