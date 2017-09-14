@@ -2,13 +2,16 @@
 
 # Ranking table calculator
 
-require './file_processor'
+require './lib/file_processor'
 require './lib/parser'
 require './lib/formatter'
-require './lib/league_result'
-file = './sample-input.txt'
-input_data = FileProcessor.read_lines(file)
-parsed_data = Parser.process(input_data)
-result = Formatter.process LeagueResult.new(parsed_data).calculate
-puts FileProcessor.write_lines('res.txt', result)
+require './lib/soccer/league'
 
+def calculate_results(input_data)
+  parsed_data = Parser.process(input_data)
+  Formatter.process Soccer::League.new(parsed_data).results
+end
+
+input_data = FileProcessor.read_lines(ARGV[0])
+puts 'Results:'
+puts calculate_results(input_data)

@@ -1,7 +1,7 @@
-require './lib/league_result'
+require './lib/soccer/league'
 require 'test/unit'
 
-class LeagueResultTest < Test::Unit::TestCase
+class LeagueTest < Test::Unit::TestCase
   def test_calculations
     input_data = [
       { 'Lions' => 3, 'Snakes' => 3 },
@@ -17,6 +17,9 @@ class LeagueResultTest < Test::Unit::TestCase
       'Snakes' => 1,
       'Grouches' => 0
     }
-    assert_equal(expected_result, LeagueResult.new(input_data).calculate)
+    assert_equal(
+      expected_result,
+      Soccer::League.new(input_data).results
+    )
   end
 end
